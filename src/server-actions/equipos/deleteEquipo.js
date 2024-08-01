@@ -1,9 +1,10 @@
 export const deleteEquipo = async (formData) => {
     try {
-        const response = await fetch(`/api/equipos/${formData.equipo}`, {
+        console.log(formData)
+        const response = await fetch(`/api/equipos/${formData.id}`, {
             method: 'DELETE',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(formData) // Convertir formData a una cadena JSON
+            body:  formData.id  // Convertir formData a una cadena JSON
         });
         
         if (!response.ok) {

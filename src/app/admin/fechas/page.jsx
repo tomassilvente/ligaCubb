@@ -32,23 +32,22 @@ const [data, setData] = useState([]);
 
   return (
     <div suppressHydrationWarning={true} className='justify-center flex text-black py-[50px]'>
-  <div className="overflow-x-auto w-full mx-[5%]">
+  <div className="overflow-x-auto w-full lg:mx-[5%]">
     <table className="min-w-full text-center rounded-xl bg-[#ddd] text-black">
       <thead>
         <tr className='h-[50px] bg-[#cbcbcb] font-bold'>
           <td className='pl-[5px]'>Fecha</td>
-          <td className="w-[5%]">Cat</td>
-          <td className="w-[5%]">Día</td>
-          <td className="w-[5%]">Horario</td>
-          <td className="w-[9%]">Cancha</td>
-          <td className="w-[10%]">Equipo 1</td>
-          <td className="w-[10%]">Equipo 2</td>
-          <td className="w-[5%]">Goles 1</td>
-          <td className="w-[5%]">Goles 2</td>
-          <td className="w-[13%]">Autores Equipo 1</td>
-          <td className="w-[13%]">Autores Equipo 2</td>
-          <td className='w-[8%]'></td>
-          <td className='w-[8%]'></td>
+          <td className="">Cat</td>
+          <td className="">Día</td>
+          <td className="w-[10%]">Horario</td>
+          <td className="w-[10%]">Cancha</td>
+          <td className="">Equipo 1</td>
+          <td className="">Equipo 2</td>
+          <td className="">Goles 1</td>
+          <td className="">Goles 2</td>
+          
+          <td className=''></td>
+          <td className=''></td>
         </tr>
       </thead>
       <tbody>
@@ -63,8 +62,7 @@ const [data, setData] = useState([]);
             <td className="text-green-700">{fecha.equipo2}</td>
             <td>{fecha.golesEquipo1}</td>
             <td>{fecha.golesEquipo2}</td>
-            <td>{fecha.autoresEquipo1}</td>
-            <td>{fecha.autoresEquipo2}</td>
+           
             <td><a href={`/admin/fechas/modificar/${fecha.id}`} className="text-blue-500">Modificar</a></td>
             <td className='pr-[5px]'>
               <button 

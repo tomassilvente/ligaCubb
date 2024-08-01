@@ -58,7 +58,6 @@ export default function NuevaFecha(){
       }
     }
     if (!formData.horario) errs.horario = 'Horario Requerido'
-    if (formData.banos < 1) errs.banos = 'Al menos 1 baño Requerida'
 
     if (Object.keys(errs).length > 0) valid = false
     setErrors(errs)

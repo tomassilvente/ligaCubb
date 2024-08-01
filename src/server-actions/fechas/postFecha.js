@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { updateEquipo } from '../equipos/updateEquipo';
-import { getEquipo } from '../equipos/getEquipo';
+import { getEquipoByName } from '../equipos/getEquipoByName';
 
 export const postFecha = async (formData) => {
     try {
@@ -10,10 +10,10 @@ export const postFecha = async (formData) => {
             formData.golesEquipo1 > formData.golesEquipo2 
                 ? equipoGanador = formData.equipo1 
                 : formData.golesEquipo2 > formData.golesEquipo1
-                ? equipo1 = formData.equipo2
+                ? equipoGanador = formData.equipo2
                 : equipoGanador = ''
 
-            let equipo1 = await getEquipo(formData.equipo1)
+            let equipo1 = await getEquipoByName(formData.equipo1)
                 equipo1.puntos = (equipoGanador === formData.equipo1 ? parseInt(equipo1.puntos) + 3 : equipoGanador === '' ? parseInt(equipo1.puntos) + 1 : parseInt(equipo1.puntos))
                 equipo1.golesFavor = parseInt(equipo1.golesFavor) + parseInt(formData.golesEquipo1)
                 equipo1.golesContra = parseInt(equipo1.golesContra) + parseInt(formData.golesEquipo2)
@@ -25,7 +25,7 @@ export const postFecha = async (formData) => {
             let resultado1 = await updateEquipo(equipo1)
             console.log(resultado1)
 
-            let equipo2 = await getEquipo(formData.equipo2)
+            let equipo2 = await getEquipoByName(formData.equipo2)
             console.log(equipo2)
                 equipo2.puntos = (equipoGanador === formData.equipo2 ? parseInt(equipo2.puntos) + 3 : equipoGanador === '' ? parseInt(equipo2.puntos) + 1 : parseInt(equipo2.puntos))
                 equipo2.golesFavor = parseInt(equipo2.golesFavor) + parseInt(formData.golesEquipo2)

@@ -35,16 +35,3 @@ export async function PUT(request){
 
     return NextResponse.json(res)
 }
-export async function DELETE(request){
-    
-    const { equipo, categoria } = await request.json() // Extraer el cuerpo de la solicitud
-        console.log(equipo, categoria);
-
-        const res = (await connection).query(
-            `DELETE FROM equipos WHERE equipo = ? AND categoria = ?`,
-            [equipo, categoria]
-        );
-
-
-    return NextResponse.json(res)
-}

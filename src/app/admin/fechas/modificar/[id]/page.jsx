@@ -16,17 +16,19 @@ export default function ModificarFecha(context){
   
   const [errors, setErrors] = useState({})
   const [formData, setFormData] = useState({
-    equipo: '',
-    zona: '',
+    fecha: 0,
     categoria: '', 
-    logo: '', 
-    puntos: 0,
-    partidosJugados: 0,
-    partidosGanados: 0,
-    partidosEmpatados: 0,
-    partidosPerdidos: 0,
-    golesFavor: 0,
-    golesContra: 0
+    dia: '',
+    equipo1: '0',
+    logoEquipo1: '',
+    equipo2: '',
+    logoEquipo2:'', 
+    cancha:'',
+    horario:'',
+    golesEquipo1: 0,
+    golesEquipo2: 0,
+    autoresEquipo1: '',
+    autoresEquipo2: ''
   })
 
   const handleChange = (e) => {

@@ -27,7 +27,7 @@ export default function AdminEquipos(){
         let eliminar = confirm(`Realmente desea eliminar a ${equipo.equipo}`)
         if(eliminar){
             let res = deleteEquipo(equipo)
-            if(res) router.refresh()
+            router.refresh()
         }
         else return  
     }
@@ -50,13 +50,13 @@ export default function AdminEquipos(){
                             if(a.categoria > b.categoria) return 1
                             if(a.categoria < b.categoria) return -1
                         }).map((equipo, index) => (
-                        <tr key={equipo.equipo} className={`text-lg ${index % 2 == 0 ? 'bg-[#eee]' : ''} `}>
+                        <tr key={equipo.id} className={`text-lg ${index % 2 == 0 ? 'bg-[#eee]' : ''} `}>
                             <td className='px-2'><Image width={50} height={50} alt={equipo.equipo} src={equipo.logo} /></td>
                             <td className='px-2'>{equipo.equipo}</td>
                             <td className='px-2'>{equipo.categoria}</td>
                             <td className='px-2'>{equipo.puntos}</td>
                             <td className='px-2 flex justify-around mt-[10px]'>
-                                <a href={`/admin/equipos/modificar/${equipo.equipo}`} className="text-blue-500">Modificar</a>
+                                <a href={`/admin/equipos/modificar/${equipo.id}`} className="text-blue-500">Modificar</a>
                                 <button 
                                     onClick={e => handleDelete(e,equipo)} 
                                     className="text-red-700 ml-5">

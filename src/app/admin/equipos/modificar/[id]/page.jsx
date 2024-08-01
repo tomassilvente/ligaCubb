@@ -3,21 +3,20 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
 //Server Actions
-import { getFecha } from '../../../../../server-actions/fechas/getFecha'
 import { getEquipo } from '../../../../../server-actions/equipos/getEquipo'
 import { updateEquipo } from '../../../../../server-actions/equipos/updateEquipo'
 
 export default function ModificarFecha(context){
 
   const {params} = context
-  const equipo = params.equipo
+  const id = params.id
 
   const router = useRouter()
 
   const [errors, setErrors] = useState({})
   const [formData, setFormData] = useState({
     equipo: '',
-    zona: '',
+    zona: 1,
     categoria: '', 
     logo: '', 
     puntos: 0,
@@ -36,7 +35,6 @@ export default function ModificarFecha(context){
 
   const validateFormData = ()=> {
 
-    
     let valid = true
     const errs = {}
     if (!formData.equipo) errs.equipo = 'equipo Requerida'
@@ -61,20 +59,19 @@ export default function ModificarFecha(context){
     e.preventDefault()
     
     if (!validateFormData()) {
-        alert(errors)
-        return 
+        console.log(errors)
+        return
     }
 
-    let res = updateEquipo(formData)
+    let res = updateEquipo(id)
     router.push('/admin/equipos')
   }
   
   useEffect(() => {
     const fetchEquipo = async () => {
-        const respuesta = await getEquipo(equipo)
+        const respuesta = await getEquipo(parseInt(id))
         if (respuesta) {
             setFormData(respuesta)
-            console.log(respuesta)
         };    
     };
     fetchEquipo();
@@ -100,12 +97,12 @@ export default function ModificarFecha(context){
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <label className="text-lg font-semibold">Categoría</label>
                 <select 
-                onChange={e => (handleCategory(e)) } 
-                value={formData.cateogria}
+                value={formData.categoria}
+                onChange={handleChange}
                 name='categoria' 
                 className="p-2 border border-gray-300 rounded-md"
                 >
-                {['A', 'B', 'C', 'D', 'E', 'FEM-A', 'FEM-B', 'FEM-C'].map(cat => (
+                {['A', 'B', 'C', 'D', 'E', 'FEMA', 'FEMB', 'FEMC'].map(cat => (
                     <option key={cat} value={cat}>{cat}</option>
                 ))}
                 </select>
@@ -114,8 +111,8 @@ export default function ModificarFecha(context){
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <label className="text-lg font-semibold">Zona</label>
               <select
-              value={formData.zona}  
-              onChange={e => (handleCategory(e)) } 
+              value={formData.zona}
+              onChange={handleChange}  
               name='zona' 
               className="p-2 border border-gray-300 rounded-md"
               >
@@ -151,6 +148,7 @@ export default function ModificarFecha(context){
               <label className="text-lg font-semibold">Partidos Jugados</label>
               <input
               value={formData.partidosJugados}
+              placeholder={formData.partidosJugados}
               type='number' 
               onChange={handleChange}
               name='partidosJugados'
